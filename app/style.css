@@ -1,7 +1,132 @@
-body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
-header { display: flex; justify-content: space-between; align-items: baseline; }
-.controls { display: flex; gap: 16px; margin: 12px 0; align-items: center; }
-.import input { font-size: 12px; }
-table { border-collapse: collapse; width: 100%; }
-th, td { border-bottom: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; white-space: pre-line; }
-th { background: #f2f2f2; }
+/* Leonida Platinum Guide: a sunset neon look of our own, pure CSS, no images, no fonts fetched. */
+:root {
+  --bg: #150e26;
+  --panel: #211640;
+  --panel2: #2a1d52;
+  --ink: #f4efe8;
+  --muted: #b9aecf;
+  --line: #3d2f6b;
+  --pink: #ff5e8a;
+  --teal: #2dd4bf;
+  --gold: #f5c542;
+  --silver: #c9d2dc;
+  --bronze: #d08a4e;
+  --platinum: #e8f1f8;
+  --danger: #ff8a5e;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #1b1030 0%, var(--bg) 240px);
+  color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", Palatino, serif;
+  font-size: 15px;
+  line-height: 1.45;
+}
+a { color: var(--teal); }
+button, input, select, textarea { font: inherit; color: inherit; }
+button, select, input[type="search"] {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+button { cursor: pointer; }
+button:hover, select:hover { border-color: var(--pink); }
+input[type="checkbox"] { accent-color: var(--pink); width: 16px; height: 16px; }
+
+.hero { padding: 22px 28px 10px; max-width: 1240px; margin: 0 auto; }
+.eyebrow { color: var(--teal); letter-spacing: 2px; text-transform: uppercase; font-size: 12px; margin: 0 0 6px; font-family: Arial, Helvetica, sans-serif; }
+h1 { margin: 0 0 6px; font-size: 40px; line-height: 1.05; color: var(--gold); }
+.subtitle { margin: 0; color: var(--muted); max-width: 900px; font-size: 16px; }
+.stats { display: flex; gap: 14px; align-items: stretch; margin-top: 16px; flex-wrap: wrap; font-family: Arial, Helvetica, sans-serif; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; min-width: 118px; }
+.stat b { display: block; font-size: 26px; color: var(--ink); }
+.stat span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.stat .bar { height: 8px; background: var(--panel2); border-radius: 4px; margin-top: 8px; overflow: hidden; }
+.stat .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--pink), var(--gold)); }
+.stat.wide { flex: 1; min-width: 220px; }
+
+.tabs { display: flex; gap: 8px; padding: 12px 28px 0; max-width: 1240px; margin: 0 auto; font-family: Arial, Helvetica, sans-serif; }
+.tabs a {
+  padding: 9px 16px; border: 1px solid var(--line); border-bottom: none; border-radius: 10px 10px 0 0;
+  background: var(--panel); color: var(--ink); text-decoration: none; font-weight: bold;
+}
+.tabs a.active { background: var(--panel2); color: var(--gold); border-color: var(--pink); }
+
+.controls {
+  display: flex; gap: 12px; align-items: end; flex-wrap: wrap;
+  max-width: 1240px; margin: 0 auto; padding: 14px 28px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 0 12px 12px 12px;
+  font-family: Arial, Helvetica, sans-serif; font-size: 13px;
+}
+.controls label { display: flex; flex-direction: column; gap: 4px; color: var(--muted); }
+.controls label.check, .controls label.spoiler { flex-direction: row; align-items: center; gap: 6px; color: var(--ink); padding-bottom: 6px; }
+.controls .search input { width: 210px; }
+.controls .tools { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.controls .import { flex-direction: row; align-items: center; background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; color: var(--ink); }
+.controls .import input { display: none; }
+
+main { max-width: 1240px; margin: 0 auto; padding: 16px 28px 8px; }
+.page-intro { color: var(--muted); font-size: 16px; max-width: 900px; margin: 4px 0 18px; }
+.layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(340px, 1fr); gap: 18px; align-items: start; }
+.list { display: flex; flex-direction: column; gap: 8px; }
+.count-line { color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 13px; }
+
+.trophy {
+  display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: start;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer;
+}
+.trophy:hover { border-color: var(--pink); }
+.trophy.selected { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+.trophy.earned { border-color: var(--teal); }
+.trophy input { margin-top: 3px; }
+.trophy h3 { margin: 0 0 2px; font-size: 16px; }
+.trophy p { margin: 0; color: var(--muted); font-size: 13.5px; }
+.trophy .meta { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+.badge.platinum { background: var(--platinum); color: #22303c; }
+.badge.gold { background: var(--gold); color: #3a2c00; }
+.badge.silver { background: var(--silver); color: #2c3540; }
+.badge.bronze { background: var(--bronze); color: #2e1a08; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--line); color: var(--muted); }
+.tag.missable { border-color: var(--danger); color: var(--danger); }
+.tag.target { border-color: var(--teal); color: var(--teal); }
+.trophy .grade-col { text-align: right; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--muted); }
+.hidden-name { color: var(--muted); font-style: italic; }
+
+.detail {
+  position: sticky; top: 12px; background: var(--panel); border: 1px solid var(--gold);
+  border-radius: 14px; padding: 18px; max-height: calc(100vh - 24px); overflow-y: auto;
+}
+.detail h2 { margin: 2px 0 4px; font-size: 24px; line-height: 1.15; }
+.detail .official { color: var(--muted); font-style: italic; margin: 0 0 10px; }
+.detail .guide-text { font-size: 14.5px; }
+.detail .sources { font-size: 13px; color: var(--teal); border-top: 1px solid var(--line); padding-top: 10px; }
+.detail .note-box { width: 100%; min-height: 56px; background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 8px; margin-top: 8px; }
+.detail label { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.detail .earn-row { display: flex; gap: 8px; align-items: center; margin: 12px 0; font-family: Arial, Helvetica, sans-serif; }
+.detail .placeholder { color: var(--muted); }
+
+.stage { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; }
+.stage h2 { margin: 0 0 4px; font-size: 20px; }
+.stage h2 .step { color: var(--pink); }
+.stage p { margin: 0 0 10px; color: var(--muted); }
+.stage .chips { display: flex; flex-wrap: wrap; gap: 6px; font-family: Arial, Helvetica, sans-serif; font-size: 12.5px; }
+.chip { background: var(--panel2); border: 1px solid var(--line); border-radius: 20px; padding: 4px 10px; }
+.chip.done { border-color: var(--teal); color: var(--teal); text-decoration: line-through; }
+.chip.hidden-chip { color: var(--muted); font-style: italic; }
+.stage .stage-progress { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--gold); }
+
+.miss-card { background: var(--panel); border: 1px solid var(--danger); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+.miss-card h2 { margin: 0 0 4px; font-size: 18px; }
+.miss-card p { margin: 4px 0; color: var(--muted); }
+.miss-card .warn { color: var(--danger); font-family: Arial, Helvetica, sans-serif; font-size: 13px; }
+
+footer { max-width: 1240px; margin: 0 auto; padding: 10px 28px 30px; color: var(--muted); font-size: 13px; }
+footer p { margin: 6px 0; }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .detail { position: static; max-height: none; }
+  h1 { font-size: 30px; }
+}
